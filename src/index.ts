@@ -1,10 +1,15 @@
+import { Observable } from 'rxjs';
 
+// const obs$ = Observable.create();
 
-console.log('Alejandro!');
+const obs$ = new Observable<string>( subs => {
+    subs.next('Hola');
+    subs.next('mundo');
 
+    subs.next('Hola');
+    subs.next('mundo');
 
+    subs.complete();
+});
 
-
-
-
-
+obs$.subscribe(console.log);
