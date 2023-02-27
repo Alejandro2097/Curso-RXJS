@@ -14,7 +14,10 @@ const intervalo$ = new Observable<number>(subs => {
     const intervalID = setInterval(
         () =>  subs.next(Math.random()), 1000
     );
-    return () => clearInterval(intervalID);
+    return () => {
+        clearInterval(intervalID);
+        console.log('Intervalo destruido');
+    }
 });
 //     SUBJECTS
 //  1 - Casteo multiple
@@ -22,9 +25,15 @@ const intervalo$ = new Observable<number>(subs => {
 //  3- Tambien se puede manejar el next error y complete
 
 const subject$ = new Subject();
-intervalo$.subscribe(subject$);
+const subscription = intervalo$.subscribe(subject$);
 // const subs1 = intervalo$.subscribe(rnd => console.log('subs1', rnd));
 // const subs2 = intervalo$.subscribe(rnd => console.log('subs2', rnd));
 
-const subs1 = subject$.subscribe( rnd => console.log('subs1', rnd))
-const subs2 = subject$.subscribe( rnd => console.log('subs2', rnd))
+const subs1 = subject$.subscribe( observer);
+const subs2 = subject$.subscribe( observer);
+
+setTimeout(() => {
+    subject$.next(10);
+    subject$.complete();
+    subscription.unsubscribe();
+}, 3500);
