@@ -1,16 +1,9 @@
-import { fromEvent } from 'rxjs'
+import { of, range } from 'rxjs';
 
-// Eventos del DOM
+// const src$ = of(1,2,3,4,5);
+const src$ = range(1,5);
 
-const src1$ = fromEvent<MouseEvent>(document, 'click');
-const src2$ = fromEvent<KeyboardEvent>(document, 'keyup');
 
-const observer = {
-    next: val => console.log('next', val)
-}
-src1$.subscribe(({x,y}) => {
-    console.log(x, y);
-});
-src2$.subscribe(evento => {
-    console.log(evento.key);
-});
+console.log('inicio');
+src$.subscribe(console.log);
+console.log('Fin');
