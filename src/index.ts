@@ -7,5 +7,6 @@ const observer = {
 
 const interval$ = interval(1000);
 
-
-interval$.subscribe(observer);
+console.log('Inicio');
+// interval$.subscribe(observer);
+console.log('Fin');
