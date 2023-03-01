@@ -1,4 +1,4 @@
-import { interval } from 'rxjs';
+import { interval, timer } from 'rxjs';
 
 const observer = {
     next: val => console.log('next:', val),
@@ -6,7 +6,9 @@ const observer = {
 }
 
 const interval$ = interval(1000);
+const timer$    = timer(2000);
 
 console.log('Inicio');
 // interval$.subscribe(observer);
+timer$.subscribe(observer);
 console.log('Fin');
