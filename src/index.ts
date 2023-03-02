@@ -10,6 +10,9 @@ import { map } from 'rxjs';
 const keyUp$ = fromEvent<KeyboardEvent>(document, 'keyup');
 const keyUpCode$ = keyUp$.pipe(
     map(event => event.code)
-)
+);
+
+const keyUpPluck$ = keyUp$.pipe();
 
 keyUpCode$.subscribe(code => console.log('map', code));
+keyUpPluck$.subscribe(code => console.log('pluck', code));
