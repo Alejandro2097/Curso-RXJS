@@ -1,4 +1,4 @@
-import { fromEvent, range } from 'rxjs';
+import { fromEvent, pluck, range } from 'rxjs';
 import { map } from 'rxjs';
 
 // range(1,5).pipe(
@@ -12,7 +12,10 @@ const keyUpCode$ = keyUp$.pipe(
     map(event => event.code)
 );
 
-const keyUpPluck$ = keyUp$.pipe();
+const keyUpPluck$ = keyUp$.pipe(
+    pluck('key', 'baseURI')
+);
 
+keyUp$.subscribe(console.log);
 keyUpCode$.subscribe(code => console.log('map', code));
 keyUpPluck$.subscribe(code => console.log('pluck', code));
