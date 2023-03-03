@@ -1,4 +1,4 @@
-import { from, range } from 'rxjs';
+import { from, fromEvent, range } from 'rxjs';
 import { filter } from 'rxjs/operators'
 
 range(1,10).pipe(
@@ -23,6 +23,9 @@ const personajes = [
 ]
 from(personajes).pipe(
     filter(val =>{
-       return val.tipo === 'Heroe'
+       return val.tipo === 'Villano'
     })
-).subscribe(console.log)
+).subscribe(console.log);
+
+const keyUp$ = fromEvent(document, 'keyup');
+
