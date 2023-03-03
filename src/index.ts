@@ -1,4 +1,4 @@
-import { fromEvent } from 'rxjs';
+import { fromEvent, map } from 'rxjs';
 const texto = document.createElement('div');
 
 texto.innerHTML = `
@@ -22,13 +22,17 @@ body.append(progressBar);
 
 
 // funcion que haga el calculo
+const calcularPorcentajeScroll = ( event ) => {
 
+}
 // Streams
 const scroll$ = fromEvent(document, 'scroll');
 
 // scroll$.subscribe(console.log)
 
-const progress$ = scroll$.pipe();
+const progress$ = scroll$.pipe(
+    map( event => calcularPorcentajeScroll(event))
+);
 
 progress$.subscribe(porcentaje => {
     progressBar.style.width = `${porcentaje}%`;
