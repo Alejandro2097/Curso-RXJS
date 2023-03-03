@@ -1,4 +1,4 @@
-import { from, fromEvent, range } from 'rxjs';
+import { from, fromEvent, map, range } from 'rxjs';
 import { filter } from 'rxjs/operators'
 
 range(1,10).pipe(
@@ -27,5 +27,10 @@ from(personajes).pipe(
     })
 ).subscribe(console.log);
 
-const keyUp$ = fromEvent(document, 'keyup');
+const keyUp$ = fromEvent<KeyboardEvent>(document, 'keyup').pipe(
+    map(event => event.code), // KeyboardEvent, STRING 
+    filter(key => key === 'Enter')
+);
+
+keyUp$.subscribe(console.log);
 
