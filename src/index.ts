@@ -1,3 +1,4 @@
+import { interval, reduce, take, tap } from "rxjs";
 
 
 
@@ -8,4 +9,14 @@ const totalReducer = (acumulador: number, valorActual: number) => {
 }
 
 const total = numbers.reduce(totalReducer, 5);
-console.log('total arr', total)
+console.log('total arr', total);
+
+interval(500).pipe(
+    take(3),
+    tap(console.log),
+    reduce(totalReducer)
+)
+.subscribe({
+    next: val => console.log('next: ', val),
+    complete: () => console.log('complete')
+})
