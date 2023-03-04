@@ -20,3 +20,15 @@ from(numeros).pipe(
     scan(totalAcumulado, 0)
 )
 .subscribe(console.log);
+
+// Redux
+
+interface Usuario {
+    id?: string;
+    autenticado?: boolean;
+    token?: string;
+    edad?: number;
+}
+const user: Usuario[] = [
+    {id: 'alejo', autenticado: false, token: null}
+]
