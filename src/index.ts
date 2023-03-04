@@ -1,4 +1,4 @@
-import { from, reduce, scan } from "rxjs";
+import { from, map, reduce, scan } from "rxjs";
 
 
 const numeros = [1,2,3,4,5];
@@ -29,6 +29,21 @@ interface Usuario {
     token?: string;
     edad?: number;
 }
+ 
 const user: Usuario[] = [
-    {id: 'alejo', autenticado: false, token: null}
-]
+    { id: 'fher', autenticado: false, token: null },
+    { id: 'fher', autenticado: true, token: 'ABC' },
+    { id: 'fher', autenticado: true, token: 'ABC123' },
+];
+ 
+const state$ = from( user ).pipe(
+    scan<Usuario, Usuario>( (acc: any, cur: any) => {
+        return { ...acc, ...cur }
+    }, { edad: 33 })
+);
+ 
+const id$ = state$.pipe(
+    map(state =>  state.id )
+);
+ 
+id$.subscribe( console.log );
