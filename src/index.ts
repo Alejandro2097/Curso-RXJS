@@ -1,4 +1,4 @@
-import { of } from "rxjs";
+import { from, of } from "rxjs";
 import { distinct } from "rxjs/operators";
 
 const numeros$ = of(1,'1',1,1,1,'1',2,2,2,3,4,4,4);
@@ -39,3 +39,7 @@ const personajes: Personaje[] = [
         nombre: 'Megaman'
     },
 ]
+
+from(personajes).pipe(
+    distinct( p => p.nombre)
+).subscribe(console.log);
