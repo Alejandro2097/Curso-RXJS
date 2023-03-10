@@ -1,5 +1,6 @@
-import { ajax } from 'rxjs/ajax';
-import { map } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { ajax, AjaxError } from 'rxjs/ajax';
+import { catchError, map, pluck } from 'rxjs/operators';
 
 const url = 'https://api.github.com/users?per_page=5';
 
@@ -8,6 +9,11 @@ const manejaErrores = (response: Response ) => {
         throw new Error( response.statusText );
     }
     return response;
+}
+
+const atrapaErr = (err: AjaxError) =>  {
+    console.warn('error en: ', err.message);
+    return of([]);
 }
 
 const fetchPromesa = fetch(url);
@@ -25,6 +31,7 @@ const fetchPromesa = fetch(url);
 
 
 ajax(url).pipe(
-    map(resp => resp.response)
+    pluck('response'),
+    catchError(atrapaErr)
 )
-.subscribe(console.log)
+.subscribe(users => console.log('Usuarios: ', users));
