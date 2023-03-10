@@ -1,4 +1,5 @@
 import { ajax } from 'rxjs/ajax';
+import { map } from 'rxjs/operators';
 
 const url = 'https://api.github.com/users?per_page=5';
 
@@ -23,4 +24,7 @@ const fetchPromesa = fetch(url);
 //     .catch(err => console.warn('error en usuarios ', err))
 
 
-ajax(url).subscribe(console.log)
+ajax(url).pipe(
+    map(resp => resp.response)
+)
+.subscribe(console.log)
