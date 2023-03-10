@@ -1,7 +1,12 @@
 
 
-
 const url = 'https://api.github.com/users?per_page=5';
+
+const manejaErrores = (response: Response ) => {
+    if(!response.ok ) {
+        throw new Error( response.statusText );
+    }
+}
 
 const fetchPromesa = fetch(url);
 
