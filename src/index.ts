@@ -7,4 +7,5 @@ const fetchPromesa = fetch(url);
 
 fetchPromesa
     .then(resp => resp.json())
+    .then(data => console.log('data: ', data))
     .catch()
