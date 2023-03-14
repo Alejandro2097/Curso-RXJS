@@ -1,11 +1,9 @@
 import { fromEvent, Observable } from 'rxjs';
-import { debounceTime, map, pluck, mergeAll } from 'rxjs/operators';
-
 import { ajax } from 'rxjs/ajax';
+import { debounceTime, map, mergeAll, pluck } from 'rxjs/operators';
 
 import { GithubUser } from '../interfaces/github-user.interface';
 import { GithubUsersResp } from '../interfaces/github-users.interface';
-
 
 // Referencias
 const body = document.querySelector('body');
@@ -42,16 +40,16 @@ const mostrarUsuarios = ( usuarios: GithubUser[] ) => {
 
 
 // Streams
-const input$ = fromEvent<KeyboardEvent>( textInput, 'keyup' );
+// const input$ = fromEvent<KeyboardEvent>( textInput, 'keyup' );
 
 
-input$.pipe(
-    debounceTime<KeyboardEvent>(500),
-    pluck<KeyboardEvent, string>('target','value'),
-    map<string, Observable<GithubUsersResp>>( texto => ajax.getJSON(
-        `https://api.github.com/search/users?q=${ texto }`
-    )),
-    mergeAll<GithubUsersResp>(),
-    pluck<GithubUsersResp, GithubUser[]>('items')
-).subscribe( mostrarUsuarios );
+// input$.pipe(
+//     debounceTime<KeyboardEvent>(500),
+//     pluck<KeyboardEvent, string>('target','value'),
+//     map<string, Observable<GithubUsersResp>>( texto => ajax.getJSON(
+//         `https://api.github.com/search/users?q=${ texto }`
+//     )),
+//     mergeAll<GithubUsersResp>(),
+//     pluck<GithubUsersResp, GithubUser[]>('items')
+// ).subscribe( mostrarUsuarios );
 
