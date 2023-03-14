@@ -1,4 +1,4 @@
-import { fromEvent, combineLatest, from } from 'rxjs';
+import { combineLatest, from, fromEvent } from 'rxjs';
 import { pluck } from 'rxjs/operators';
 
 // const keyup$ = fromEvent( document, 'keyup');
@@ -21,12 +21,12 @@ document.querySelector('body').append(input1, input2);
 
 
 // Helper
-const getInputStream = ( elem: HTMLElement ) => 
-    fromEvent<KeyboardEvent>( elem, 'keyup' ).pipe(
-        pluck<KeyboardEvent,string>('target','value'));
+// const getInputStream = ( elem: HTMLElement ) => 
+//     fromEvent<KeyboardEvent>( elem, 'keyup' ).pipe(
+//         pluck<KeyboardEvent,string>('target','value'));
 
 
-combineLatest(
-    getInputStream( input1 ),
-    getInputStream( input2 ),
-).subscribe( console.log )
+// combineLatest(
+//     getInputStream( input1 ),
+//     getInputStream( input2 ),
+// ).subscribe( console.log )
