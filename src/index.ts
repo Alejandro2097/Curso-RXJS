@@ -1,4 +1,4 @@
-import { interval, timer } from 'rxjs';
+import { combineLatest, concat, interval, timer } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 /**
@@ -44,7 +44,9 @@ import { map, take } from 'rxjs/operators';
     // de estar procesada en su totalidad
     // ========================================
 
-
+   combineLatest(letras$, numeros$).pipe(
+    map(([a,b]) => a+b)
+   ).subscribe( console.log  )
 
 
 
