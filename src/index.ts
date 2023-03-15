@@ -1,4 +1,4 @@
-import { interval } from 'rxjs';
+import { interval, Subject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 /**
@@ -19,11 +19,11 @@ import { map, take } from 'rxjs/operators';
   // ============================================
 
     
-  
-  
+  const subject$ = new Subject();
+  const subscription = reloj$.subscribe(subject$);
   // Estos dos observables deben de emitir exactamente los mismos valores
-  reloj$.subscribe( val => console.log('obs1', val) );
-  reloj$.subscribe( val => console.log('obs2', val) );
+  const subs1 = subject$.subscribe( val => console.log('obs1', val) );
+  const subs2 = subject$.subscribe( val => console.log('obs2', val) );
 
 
 
